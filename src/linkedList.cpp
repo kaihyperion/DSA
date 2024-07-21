@@ -1,5 +1,6 @@
 #include "my_algorithms.h"
 #include <iostream>
+#include <unordered_set>
 
 // LinkedList implementation
 LinkedList::Node* LinkedList::createNode(int data) {
@@ -76,6 +77,66 @@ bool LinkedList::contains(int val) const {
     return false;
 }
 
+int LinkedList::countElement(int val) const {
+    Node* curr = head;
+    int count = 0;
+    while (curr != nullptr){
+        if (curr -> data == val) count++;
+        curr = curr->next;
+    }
+    return count;
+}
+
+// Chapter 2.1 Remove Dups: Write  code to remove duplicates from an unsorted linked list
+void LinkedList::removeDups() {
+    if (head == nullptr) return;
+
+    std::unordered_set<int> seen;
+    Node* curr = head;
+    Node* prev = nullptr;
+
+    while (curr != nullptr){
+        if (seen.contains(curr->data)){
+            prev->next = curr->next;
+            delete curr;
+        } else {
+            seen.insert(curr->data);
+            prev = curr;
+        }
+        curr = prev->next;
+    }
+}
+
+// Chapter 2 - 2.2 Return Kth to Last
+// Implement an algorithm to find the kth to last element of a singly linked list.
+int LinkedList::printKthToLast(int k) const {
+    // idea: move the fast pointer kth step forward. then slow and fast point move together until end
+    // Best plausible time complexity O(N) we have to know the end so we must traverse
+    if (head == nullptr) return -1;
+
+    Node* fast = head;
+    Node* slow = head;
+
+    while (fast->next != nullptr && k > 0){
+        fast = fast->next;
+        k--;
+    }
+    // if k is greater than length of singly linked list
+    if (fast->next == nullptr && k>0){
+        return -1;
+    }
+    if (fast -> next == nullptr && k == 0){
+        return slow->data;
+    }
+
+    while (fast->next != nullptr){
+        fast = fast->next;
+        slow = slow->next;
+    }
+    return slow->data;
+
+}
+
 // Algorithm implementations
 int findMax(const std::vector<int>& nums) {
     if (nums.empty()) return INT_MIN;
@@ -99,3 +160,6 @@ bool isPalindrome(const std::string& s) {
     }
     return true;
 }
+
+
+

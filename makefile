@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++11 -Iinclude
+CXXFLAGS = -std=c++20 -Iinclude
 
 # Specify the directories
 INCLUDE_DIR = include

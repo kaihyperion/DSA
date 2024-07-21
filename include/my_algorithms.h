@@ -23,6 +23,9 @@ public:
     void printList() const;
     void deleteList();
     bool contains(int val) const;
+    void removeDups();
+    int countElement(int val) const;
+    int printKthToLast(int k) const;
 };
 
 // Add more algorithms and data structures as needed

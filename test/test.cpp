@@ -19,6 +19,38 @@ void testLinkedList() {
     assert(list.contains(3) == false);
 }
 
+void testRemoveDups() {
+    LinkedList list;
+    list.insertAtEnd(1);
+    list.insertAtEnd(2);
+    list.insertAtEnd(3);
+    list.insertAtEnd(3);
+    list.insertAtEnd(3);
+    list.insertAtEnd(4);
+    std::cout << "Linked list before Duplication removal: ";
+    list.printList();
+
+    list.removeDups();
+    std::cout << "Linked list after Duplication removal: ";
+    list.printList();
+
+
+    assert(list.contains(3) == true);
+    assert(list.countElement(3) == 1);
+}
+
+void testKthToLast() {
+    LinkedList list;
+    std::array <int, 6> ls {1,2,3,4,5,6};
+    for (int i : ls){
+        list.insertAtEnd(i);
+    }
+    assert(list.printKthToLast(3) == 3);
+    assert(list.printKthToLast(1) == 5);
+    assert(list.printKthToLast(10) == -1);
+
+}
+
 void testFindMax() {
     std::vector<int> nums = {1, 3, 5, 7, 9};
     assert(findMax(nums) == 9);
@@ -40,6 +72,8 @@ int main() {
     testLinkedList();
     testFindMax();
     testIsPalindrome();
+    testRemoveDups();
+    testKthToLast();
     std::cout << "All tests passed!" << std::endl;
     return 0;
 }
