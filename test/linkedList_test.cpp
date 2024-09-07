@@ -51,6 +51,23 @@ void testKthToLast() {
 
 }
 
+void testSumLists() {
+    LinkedList list1;
+    LinkedList list2;
+    std::array <int, 3> ls1 {7,1,6};
+    for (int i : ls1){
+        list1.insertAtEnd(i);
+    }
+    std::array <int, 3> ls2 {5,9,2};
+    for (int i : ls2){
+        list2.insertAtEnd(i);
+    }
+    LinkedList result = LinkedList::addLists(list1, list2);
+    std::cout << "Result: ";
+    result.printList();
+
+}
+
 void testFindMax() {
     std::vector<int> nums = {1, 3, 5, 7, 9};
     assert(findMax(nums) == 9);
@@ -74,6 +91,7 @@ int main() {
     testIsPalindrome();
     testRemoveDups();
     testKthToLast();
+    testSumLists();
     std::cout << "All tests passed!" << std::endl;
     return 0;
 }

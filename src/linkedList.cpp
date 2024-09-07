@@ -137,6 +137,29 @@ int LinkedList::printKthToLast(int k) const {
 
 }
 
+// 2.5 sum lists. 2 numbers represented in linked list. each node contains a single digit. digits are stored in reverse order, such that the1's digit is at the head of hte list. write afunction that adds the two nubmerw and retuns the sum as linked list'
+LinkedList LinkedList::addLists(const LinkedList& list1, const LinkedList& list2) {
+    Node* l1 = list1.getHead();
+    Node* l2 = list2.getHead();
+    LinkedList result;
+    int carry = 0;
+
+    while (l1 != nullptr || l2 != nullptr || carry != 0) {
+        int sum = carry;
+        if (l1) {
+            sum += l1->data;
+            l1 = l1->next;
+        }
+        if (l2){
+            sum += l2->data;
+            l2 = l2->next;
+        }
+        carry = sum / 10;
+        result.insertAtEnd(sum%10);
+    }
+    return result;
+}
+ 
 // Algorithm implementations
 int findMax(const std::vector<int>& nums) {
     if (nums.empty()) return INT_MIN;
