@@ -71,6 +71,8 @@ public:
     void showTree();
     
     void inOrderTraversal();
+    void preOrderTraversal();
+    void postOrderTraversal();
 
 
 private:
@@ -82,6 +84,11 @@ private:
     void showTreeHelper(TreeNode* node, std::string indent, bool isLeft);
 
     void inOrderTraversalHelper(TreeNode* node);
+
+    void preOrderTraversalHelper(TreeNode* node);
+
+    void postOrderTraversalHelper(TreeNode* node);
+    
 };
 
 

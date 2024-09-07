@@ -94,3 +94,27 @@ void Tree::inOrderTraversalHelper(TreeNode* node){
         inOrderTraversalHelper(node->right);
     }
 }
+
+void Tree::preOrderTraversal() {
+    preOrderTraversalHelper(root);
+}
+
+void Tree::preOrderTraversalHelper(TreeNode* node) {
+    if (node) {
+        std::cout << node->value << " -> ";
+        preOrderTraversalHelper(node->left);
+        preOrderTraversalHelper(node->right);
+    }
+}
+
+void Tree::postOrderTraversal(){
+    postOrderTraversalHelper(root);
+}
+
+void Tree::postOrderTraversalHelper(TreeNode* node){
+    if (node) {
+        postOrderTraversalHelper(node->left);
+        postOrderTraversalHelper(node->right);
+        std::cout << node->value << " -> ";
+    }
+}

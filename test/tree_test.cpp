@@ -21,8 +21,15 @@ int main() {
     std::cout << "Search for 7: " << (tree.search(7) ? "Found" : "Not Found") << std::endl;
     std::cout << "Search for 1: " << (tree.search(1) ? "Found" : "Not Found") << std::endl;
 
-    std::cout << "In order Traversal" << std::endl;
+    std::cout << "In-order Traversal" << std::endl;
     tree.inOrderTraversal();
+    std::cout << "done" << std::endl;
+    std::cout << "Pre-order Traversal" << std::endl;
+    tree.preOrderTraversal();
+    std::cout << "done" << std::endl;
+    std::cout << "Post-order Traversal" << std::endl;
+    tree.postOrderTraversal();
+    std::cout << "done" << std::endl;
     tree.clear();
     return 0;
 }
