@@ -168,5 +168,96 @@ void MinHeapTree::insert(int value) {
 
 // Bubble up helper function to maintain heap property  after insertion
 void MinHeapTree::bubbleUp(TreeNode* node) {
-    
+    while (node->parent != nullptr && node->parent->value > node->value){
+        std::swap(node->value, node->parent->value);
+        node = node->parent;
+    }
+}
+
+// Extract Minimum element (root) from the heap
+int MinHeapTree::extractMin(){
+    if (root == nullptr) {  // if root doesn't exist
+        throw std::runtime_error("Heap is empty...");
+    }
+
+    int minElement = root->value;
+
+    if (size == 1) {
+        delete root;
+        root = nullptr;
+    } else {
+        TreeNode* lastNode = getLastNode();
+        root->value = lastNode->value;
+        removeLastNode(lastNode);
+
+        bubbleDown(root);
+    }
+    size--;
+    return minElement;
+}
+
+MinHeapTree::TreeNode* MinHeapTree::getLastNode() {
+    std::queue<TreeNode*> q;
+    q.push(root);
+    TreeNode* lastNode = nullptr;
+
+    while (!q.empty()){
+        lastNode = q.front();
+        q.pop();
+        if (lastNode->left) q.push(lastNode->left);
+        if (lastNode->right) q.push(lastNode->right);
+    }
+    return lastNode;
+}
+
+void MinHeapTree::removeLastNode(TreeNode* lastNode){
+    // figure out if the lastNode is the left or right side of parent
+    if (lastNode->parent->left == lastNode){
+        lastNode->parent->left = nullptr;
+    } else {
+        lastNode->parent->right = nullptr;
+    }
+    delete lastNode;
+}
+
+void MinHeapTree::bubbleDown(TreeNode* node){
+    while (node){
+        TreeNode* smallest = node;
+        if (node->left && node->left->value < smallest->value){
+            smallest = node->left;
+        }
+        if (node->right && node->right->value < smallest->value){
+            smallest = node->right;
+        }
+        if (smallest != node){
+            std::swap(node->value, smallest->value);
+            node = smallest;
+        } else {
+            break;
+        }
+    }
+}
+
+// for visuals : print the tree
+void MinHeapTree::showTree() {
+    showTreeHelper(root, "", true);
+}
+
+void MinHeapTree::showTreeHelper(TreeNode* node, std::string indent, bool isLeft){
+    if (node != nullptr){
+        // print right subtree
+        showTreeHelper(node->right, indent + (isLeft ? "        " : " |      "), false);
+
+        // Print the current node
+        std::cout << indent;
+        if (isLeft) {
+            std::cout << " \\--- ";
+        } else {
+            std::cout << " /--- ";
+        }
+        std::cout << node->value << std::endl;
+
+        // print the left subtree
+        showTreeHelper(node->left, indent + (isLeft ? " |      " : "        "), true);
+    }
 }

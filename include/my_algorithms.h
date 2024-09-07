@@ -112,7 +112,7 @@ private:
     void bubbleUp(TreeNode* node);
     void bubbleDown(TreeNode* node);
     TreeNode* getLastNode();
-    TreeNode* removeLastNode(TreeNode* lastNode);
+    void removeLastNode(TreeNode* lastNode);
 
 
 public:
