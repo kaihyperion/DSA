@@ -62,6 +62,7 @@ public:
     // constructor and destructor
     Tree();
     ~Tree();
+    // constructor and destructor values are in
 
     // Basic Operations 
     void insert(int value);
@@ -89,6 +90,41 @@ private:
 
     void postOrderTraversalHelper(TreeNode* node);
     
+};
+
+class MinHeapTree {
+private:
+
+    // Nested Private struct for TreeNode
+    struct TreeNode {
+        int value;
+        TreeNode* left;
+        TreeNode* right;
+        TreeNode* parent;
+
+        TreeNode(int val) : value(val), left(nullptr), right(nullptr), parent(nullptr) {}
+    };
+
+    TreeNode* root; // pointer to the root node of the tree
+    int size; // to keep track of # of nodes
+
+    // helper function
+    void bubbleUp(TreeNode* node);
+    void bubbleDown(TreeNode* node);
+    TreeNode* getLastNode();
+    TreeNode* removeLastNode(TreeNode* lastNode);
+
+
+public:
+    MinHeapTree();
+
+    // min heap public operation
+    void insert(int value);
+    int extractMin();
+    void showTree();
+
+private:
+    void showTreeHelper(TreeNode* node, std::string indent, bool isLeft);
 };
 
 
